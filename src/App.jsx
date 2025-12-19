@@ -23,15 +23,17 @@ import {
   Lock,
   ChevronRight,
   X,
-  Cookie
+  Cookie,
+  Construction,
+  Mail,
+  Phone,
+  MapPin
 } from 'lucide-react';
 
 // Configuration - Update these URLs as needed
 const CONFIG = {
-  dataSyncUrl: 'https://data-sync-ai-frontend-production.up.railway.app', // Update with actual URL
-  keansaWebsite: 'https://www.keansa.nl',
-  privacyPolicy: 'https://www.keansa.nl/privacy',
-  cookiePolicy: 'https://www.keansa.nl/cookies',
+  dataSyncUrl: 'https://data-sync-ai-frontend-production.up.railway.app',
+  keansaWebsite: 'https://www.keansa.com',
 };
 
 // Cookie Consent Banner
@@ -68,10 +70,9 @@ const CookieConsent = () => {
             <p className="text-white/80 text-sm leading-relaxed">
               We use cookies to enhance your experience and analyze site traffic. 
               By continuing to browse, you agree to our use of cookies. 
-              <a href={CONFIG.cookiePolicy} target="_blank" rel="noopener noreferrer" 
-                 className="text-cyan-400 hover:text-cyan-300 underline ml-1">
+              <Link to="/cookies" className="text-cyan-400 hover:text-cyan-300 underline ml-1">
                 Learn more
-              </a>
+              </Link>
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -128,12 +129,12 @@ const Header = () => {
           </Link>
           <a href={CONFIG.keansaWebsite} target="_blank" rel="noopener noreferrer"
              className="text-sm font-medium text-white/60 hover:text-white transition-colors flex items-center gap-1">
-            Keansa.nl <ArrowUpRight size={14} />
+            Keansa.com <ArrowUpRight size={14} />
           </a>
-          <a href={`${CONFIG.keansaWebsite}#contact`} target="_blank" rel="noopener noreferrer"
+          <Link to="/contact"
              className="px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-lg text-sm font-medium text-white transition-all">
             Contact Sales
-          </a>
+          </Link>
         </nav>
       </div>
     </header>
@@ -165,7 +166,7 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-display font-semibold mb-4">Products</h4>
             <div className="space-y-2">
-              <a href={CONFIG.dataSyncUrl} className="block text-white/50 hover:text-white text-sm transition-colors">
+              <a href={CONFIG.dataSyncUrl} target="_blank" rel="noopener noreferrer" className="block text-white/50 hover:text-white text-sm transition-colors">
                 Data Sync AI
               </a>
               <Link to="/plansync" className="block text-white/50 hover:text-white text-sm transition-colors">
@@ -180,18 +181,15 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-display font-semibold mb-4">Company</h4>
             <div className="space-y-2">
-              <a href={CONFIG.keansaWebsite} target="_blank" rel="noopener noreferrer" 
-                 className="block text-white/50 hover:text-white text-sm transition-colors">
+              <Link to="/about" className="block text-white/50 hover:text-white text-sm transition-colors">
                 About Keansa
-              </a>
-              <a href={`${CONFIG.keansaWebsite}#contact`} target="_blank" rel="noopener noreferrer"
-                 className="block text-white/50 hover:text-white text-sm transition-colors">
+              </Link>
+              <Link to="/contact" className="block text-white/50 hover:text-white text-sm transition-colors">
                 Contact
-              </a>
-              <a href={CONFIG.privacyPolicy} target="_blank" rel="noopener noreferrer"
-                 className="block text-white/50 hover:text-white text-sm transition-colors">
+              </Link>
+              <Link to="/privacy" className="block text-white/50 hover:text-white text-sm transition-colors">
                 Privacy Policy
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -205,18 +203,15 @@ const Footer = () => {
               We are GDPR compliant and committed to protecting your data privacy.
             </div>
             <div className="flex items-center gap-6 text-xs">
-              <a href={CONFIG.privacyPolicy} target="_blank" rel="noopener noreferrer"
-                 className="text-white/40 hover:text-white transition-colors">
+              <Link to="/privacy" className="text-white/40 hover:text-white transition-colors">
                 Privacy Policy
-              </a>
-              <a href={CONFIG.cookiePolicy} target="_blank" rel="noopener noreferrer"
-                 className="text-white/40 hover:text-white transition-colors">
+              </Link>
+              <Link to="/cookies" className="text-white/40 hover:text-white transition-colors">
                 Cookie Policy
-              </a>
-              <a href={`${CONFIG.keansaWebsite}/terms`} target="_blank" rel="noopener noreferrer"
-                 className="text-white/40 hover:text-white transition-colors">
+              </Link>
+              <Link to="/terms" className="text-white/40 hover:text-white transition-colors">
                 Terms of Service
-              </a>
+              </Link>
             </div>
           </div>
           <div className="mt-4 text-center">
@@ -228,6 +223,186 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+  );
+};
+
+// Work In Progress Page Component
+const WorkInProgressPage = ({ title, description }) => {
+  return (
+    <div className="min-h-screen bg-gradient-mesh noise flex items-center justify-center">
+      <div className="max-w-2xl mx-auto px-6 text-center">
+        <div className="glass rounded-3xl p-12">
+          <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-8">
+            <Construction className="text-white" size={40} />
+          </div>
+          <h1 className="text-4xl font-display font-bold text-white mb-4">
+            {title}
+          </h1>
+          <p className="text-white/60 mb-8 leading-relaxed">
+            {description || "We're working hard to bring you this page. Please check back soon!"}
+          </p>
+          <Link
+            to="/"
+            className="inline-flex px-8 py-4 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold rounded-xl hover:opacity-90 transition-all items-center gap-2"
+          >
+            <ChevronRight size={18} className="rotate-180" /> Back to Home
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Privacy Policy Page
+const PrivacyPage = () => (
+  <WorkInProgressPage 
+    title="Privacy Policy" 
+    description="Our privacy policy is being finalized. We are committed to protecting your personal data in accordance with GDPR and other applicable regulations."
+  />
+);
+
+// Cookie Policy Page
+const CookiesPage = () => (
+  <WorkInProgressPage 
+    title="Cookie Policy" 
+    description="Our cookie policy is being prepared. We use cookies to enhance your browsing experience and analyze site traffic."
+  />
+);
+
+// Terms of Service Page
+const TermsPage = () => (
+  <WorkInProgressPage 
+    title="Terms of Service" 
+    description="Our terms of service are being drafted. Please check back soon for the complete terms and conditions."
+  />
+);
+
+// About Page
+const AboutPage = () => (
+  <WorkInProgressPage 
+    title="About Keansa" 
+    description="Learn more about Keansa Solutions and our mission to transform Enterprise Performance Management with AI."
+  />
+);
+
+// Contact Page
+const ContactPage = () => {
+  return (
+    <div className="min-h-screen bg-gradient-mesh noise pt-32 pb-20">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
+            Contact Sales
+          </h1>
+          <p className="text-white/60 max-w-xl mx-auto">
+            Ready to transform your enterprise performance management? Get in touch with our team.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Contact Form */}
+          <div className="glass rounded-3xl p-8">
+            <h2 className="text-xl font-display font-semibold text-white mb-6">Send us a message</h2>
+            <form className="space-y-4">
+              <div>
+                <label className="block text-white/60 text-sm mb-2">Name</label>
+                <input 
+                  type="text" 
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-cyan-500 transition-colors"
+                  placeholder="Your name"
+                />
+              </div>
+              <div>
+                <label className="block text-white/60 text-sm mb-2">Email</label>
+                <input 
+                  type="email" 
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-cyan-500 transition-colors"
+                  placeholder="your@email.com"
+                />
+              </div>
+              <div>
+                <label className="block text-white/60 text-sm mb-2">Company</label>
+                <input 
+                  type="text" 
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-cyan-500 transition-colors"
+                  placeholder="Your company"
+                />
+              </div>
+              <div>
+                <label className="block text-white/60 text-sm mb-2">Message</label>
+                <textarea 
+                  rows={4}
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-cyan-500 transition-colors resize-none"
+                  placeholder="How can we help?"
+                />
+              </div>
+              <button 
+                type="submit"
+                className="w-full py-4 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold rounded-xl hover:opacity-90 transition-all flex items-center justify-center gap-2"
+              >
+                Send Message <ArrowRight size={18} />
+              </button>
+            </form>
+          </div>
+
+          {/* Contact Info */}
+          <div className="space-y-6">
+            <div className="glass rounded-2xl p-6">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center">
+                  <Mail className="text-cyan-400" size={24} />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold">Email</h3>
+                  <p className="text-white/60 text-sm">info@keansa.com</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="glass rounded-2xl p-6">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-teal-500/20 rounded-xl flex items-center justify-center">
+                  <Globe className="text-teal-400" size={24} />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold">Website</h3>
+                  <a href={CONFIG.keansaWebsite} target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 text-sm">
+                    www.keansa.com
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="glass rounded-2xl p-6">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-violet-500/20 rounded-xl flex items-center justify-center">
+                  <MapPin className="text-violet-400" size={24} />
+                </div>
+                <div>
+                  <h3 className="text-white font-semibold">Global Offices</h3>
+                  <p className="text-white/60 text-sm">USA • Netherlands • UAE • India • Singapore • Australia</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="glass rounded-2xl p-6 bg-gradient-to-br from-cyan-500/10 to-teal-500/10">
+              <h3 className="text-white font-semibold mb-2">Enterprise Inquiries</h3>
+              <p className="text-white/60 text-sm mb-4">
+                For enterprise solutions and custom implementations, our team is ready to help.
+              </p>
+              <a 
+                href={CONFIG.keansaWebsite}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 text-sm font-medium"
+              >
+                Visit Keansa.com <ArrowUpRight size={16} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -273,17 +448,27 @@ const ProductCard = ({ product, index }) => {
 
         {/* Actions */}
         <div className="flex flex-col gap-3 mt-auto">
+          {product.external ? (
+            <a
+              href={product.launchUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-3.5 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all group/btn"
+            >
+              Launch {product.name}
+              <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
+            </a>
+          ) : (
+            <Link
+              to={product.launchUrl}
+              className="w-full py-3.5 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all group/btn"
+            >
+              Launch {product.name}
+              <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
+            </Link>
+          )}
           <a
-            href={product.launchUrl}
-            target={product.external ? "_blank" : "_self"}
-            rel={product.external ? "noopener noreferrer" : ""}
-            className="w-full py-3.5 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all group/btn"
-          >
-            Launch {product.name}
-            <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
-          </a>
-          <a
-            href={product.knowMoreUrl}
+            href={`${CONFIG.keansaWebsite}/#${product.knowMoreId}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full py-3.5 border border-white/10 hover:border-white/20 text-white/80 hover:text-white font-medium rounded-xl flex items-center justify-center gap-2 transition-all"
@@ -307,7 +492,7 @@ const HomePage = () => {
       description: 'Universal data integration across all EPM platforms. AI-powered mapping, validation, and real-time synchronization.',
       features: ['Auto-mapping with AI', 'Real-time sync', 'Universal connectors', 'Data validation'],
       launchUrl: CONFIG.dataSyncUrl,
-      knowMoreUrl: `${CONFIG.keansaWebsite}#datasync`,
+      knowMoreId: 'datasync',
       external: true
     },
     {
@@ -317,7 +502,7 @@ const HomePage = () => {
       description: 'Synchronize planning across multiple systems. Ensure consistency, resolve conflicts, and maintain version control.',
       features: ['Multi-platform sync', 'Version control', 'Conflict resolution', 'Workflow automation'],
       launchUrl: '/plansync',
-      knowMoreUrl: `${CONFIG.keansaWebsite}#plansync`,
+      knowMoreId: 'plansync',
       external: false
     },
     {
@@ -327,7 +512,7 @@ const HomePage = () => {
       description: 'AI-powered decision intelligence. Predictive analytics, smart recommendations, and natural language insights.',
       features: ['Predictive analytics', 'Smart recommendations', 'Natural language queries', 'Impact analysis'],
       launchUrl: '/decisionsync',
-      knowMoreUrl: `${CONFIG.keansaWebsite}#decisionsync`,
+      knowMoreId: 'decisionsync',
       external: false
     }
   ];
@@ -409,14 +594,12 @@ const HomePage = () => {
               Join leading enterprises already using Keansa Enterprise OS to drive performance.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <a
-                href={`${CONFIG.keansaWebsite}#contact`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/contact"
                 className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold rounded-xl hover:opacity-90 transition-all flex items-center justify-center gap-2"
               >
                 Schedule Demo <ArrowRight size={18} />
-              </a>
+              </Link>
               <a
                 href={CONFIG.keansaWebsite}
                 target="_blank"
@@ -505,16 +688,14 @@ const PlanSyncPage = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href={`${CONFIG.keansaWebsite}#contact`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to="/contact"
                   className="px-8 py-4 bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-semibold rounded-xl hover:opacity-90 transition-all flex items-center justify-center gap-2"
                 >
                   Request Demo <ArrowRight size={18} />
-                </a>
+                </Link>
                 <a
-                  href={`${CONFIG.keansaWebsite}#plansync`}
+                  href={`${CONFIG.keansaWebsite}/#plansync`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-8 py-4 border border-white/10 hover:border-white/20 text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2"
@@ -595,14 +776,12 @@ const PlanSyncPage = () => {
               <p className="text-white/60 mb-6">
                 Plan Sync AI is currently in development. Join our early access program to be among the first to experience the future of unified planning.
               </p>
-              <a
-                href={`${CONFIG.keansaWebsite}#contact`}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/contact"
                 className="w-full py-4 bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-semibold rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all"
               >
                 Join Early Access <ArrowRight size={18} />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -682,16 +861,14 @@ const DecisionSyncPage = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href={`${CONFIG.keansaWebsite}#contact`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to="/contact"
                   className="px-8 py-4 bg-gradient-to-r from-violet-500 to-purple-500 text-white font-semibold rounded-xl hover:opacity-90 transition-all flex items-center justify-center gap-2"
                 >
                   Request Demo <ArrowRight size={18} />
-                </a>
+                </Link>
                 <a
-                  href={`${CONFIG.keansaWebsite}#decisionsync`}
+                  href={`${CONFIG.keansaWebsite}/#decisionsync`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-8 py-4 border border-white/10 hover:border-white/20 text-white font-medium rounded-xl transition-all flex items-center justify-center gap-2"
@@ -788,14 +965,12 @@ const DecisionSyncPage = () => {
               Decision Sync AI is currently in development. Be the first to experience 
               AI-powered decision intelligence for your enterprise.
             </p>
-            <a
-              href={`${CONFIG.keansaWebsite}#contact`}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/contact"
               className="inline-flex px-8 py-4 bg-gradient-to-r from-violet-500 to-purple-500 text-white font-semibold rounded-xl hover:opacity-90 transition-all items-center gap-2"
             >
               Join Early Access <ArrowRight size={18} />
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -813,6 +988,11 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/plansync" element={<PlanSyncPage />} />
           <Route path="/decisionsync" element={<DecisionSyncPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/cookies" element={<CookiesPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
       </main>
       <Footer />
